@@ -1,6 +1,30 @@
 #include<stdio.h>
 
-int c, buf1, buf2, buf3;
+int c, buf1, buf2, buf3, off1, off2;
+
+char getchar(char * s1){return s1[off1++];}
+void putchar(char c, char * s2){s2[off2++] = c;}
+int match(void){
+	if(buf1 >= 0x61 && buf1 <= 0x7a){
+		if(buf3 >= buf1 && buf3 <= 0x7a){
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+	}else if(buf1 >= 0x41 && buf1 <= 0x5a){
+		if(buf3 >= buf1 && buf3 <= 0x5a){
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+	}else if(buf1 >= 0x30 && buf1 <= 0x39){
+		if(buf3 >= buf1 && buf3 <= 0x39){
+			return TRUE;
+		}else{
+			return FALSE;
+		}
+	}else{return FALSE;}
+}
 
 void main(void){
 /*
@@ -24,7 +48,7 @@ stage3
 //		}
 //	}
 
-printf("%x%x %x%x %x%x", 'a', 'z', 'A', 'Z', '0', '9');
+//printf("%x%x %x%x %x%x", 'a', 'z', 'A', 'Z', '0', '9');
 
 
 
