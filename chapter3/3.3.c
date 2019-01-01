@@ -2,7 +2,9 @@
 #include<ctype.h>
 #define TRUE 1
 #define FALSE 0
-char string1[32], string2[32];
+char string1[] = "hello a-z world";
+char string2[32];
+
 int c, buf1, buf2, buf3, off1, off2;
 
 char get(char * s1){return s1[off1++];}
@@ -78,8 +80,9 @@ int stage3(char * s1, char * s2){
 	return stage1(s1, s2);
 }
 void main(void){
-	string1 = "hello world";
 	stage1(string1, string2);
+	printf("%s\n", string1);
+	printf("%s\n", string2);
 }
 /*
 stage1
