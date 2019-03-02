@@ -1,6 +1,7 @@
 #include<stdio.h>
-
-int setbits(int x, int p, int n, int y){
+ /*i think this soln counts up n times from the position
+	KnR expects it to count down.	*/
+int setbits1(int x, int p, int n, int y){
 	//rightmost n bits of y
 	int right_most_y = ((1<<n) - 1) & y;
 	//shifted p positions
@@ -15,17 +16,34 @@ int setbits(int x, int p, int n, int y){
 
 	return right_most_y | high_x | low_x;
 }
+//////////////////////////////////////////////////////
+// first term moves desired field to right end
+//second term is string of 1 with n zeros, notted 
+unsigned getbits(unsigned x, int p, int n){
+	return (x >> (p+1-n)) & ~(~0 << n);
+}
+//////////////////////////////////////////////////////
+// 	getbits is UNDEFINED behavior for n + 1 > p
+//	CANNOT SHIFT BY NEG RIGHT OPERAND!!!!!!!!!!!!!1111
+///////////////////use getbits!///////////////////////
+
+unsigned setbits(unsigned x, int p, int n, unsigned y){
+	unsigned x_high, x_low, y_part;
+	//extract from y
+	y_part = getbits(y, n-1, n);
+	//align 
+	y_part  <<= (p+1-n);
+	//from x
+	x_high = x << p;
+	x_low = getbits(x, p+1-n, p+2-n);
+	printf("y_part %u\nx_high %u\nx_low %u\n",
+		y_part, x_high, x_low);
+	printf("%u\n",y_part | x_high | x_low);
+	return y_part | x_high | x_low;
+}
 
 int main(int argc, char ** argv){
-	int x = 15; 
-	int y = 0;
-	int n = 2;
-	int p = 0;
-	printf("x is %d\ny is %d\nn is %d\np is %d\n", x, y, n, p);
-	printf("sebits() is %d\n", setbits(x, p, n, y));  	
-
-
-
+	setbits(0, 5, 1, 1);
 
 
 
