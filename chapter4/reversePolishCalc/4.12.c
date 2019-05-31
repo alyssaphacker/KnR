@@ -14,10 +14,14 @@ int main(void){
 
 void itoa(int i, char * s){
 	static int j = 0;
+	static int k = 0;
+
 	if(!i){
-		*(s + j) = '\0';
+		*(s + k) = '\0';
 		return;
 	}
+
+	k++;
 	itoa(i/10, s);
 	*(s + j++) = i % 10 + '0';
 }
