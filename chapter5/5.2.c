@@ -33,9 +33,11 @@ int getfloat(float *pn){
 	if(c == '.'){
 		float part = 0;
 		float scale = 0.1;
-		for( ; isdigit(c); c = getch(), scale *= 0.1)
-			part += scale * c;
-		*pn += scale;	
+		c = getchar();
+		for( ; isdigit(c); c = getch(), scale *= 0.1){
+			part += scale * (c - '0');
+		}
+		*pn += part;	
 	}
 	*pn *= sign;
 	if(c != EOF)
