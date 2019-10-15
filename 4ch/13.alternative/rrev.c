@@ -17,12 +17,23 @@ void rrev(char * s){
 		*(s+m) = t;
 		n++;
 		m--;
+	}else{
+		m = n = 0;
 	}
 }
 
 int main(void){
 	char s[] = "hello worldlings";
+	char w[] = "hopethisworks";
+	char q[] = "abc";
 	rrev(s); 
+	rrev(w);
+	rrev(q);
 	printf("%s\n", s);
+	printf("%s\n", w);
+	printf("%s\n", q);
+	rrev(s);
+	printf("%s\n", s);
+	
 	return 0;
 }
